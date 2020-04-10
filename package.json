@@ -1,0 +1,30 @@
+{
+  "name": "tailwind-config-to-php",
+  "version": "1.0.0",
+  "description": "Save your tailwind.config.js as a PHP file.",
+  "main": "index.js",
+  "dependencies": {
+    "tailwindcss": "^1.0",
+    "yargs": "^15.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vendeka-nl/tailwind-config-to-php.git"
+  },
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "config",
+    "php"
+  ],
+  "author": "Vendeka",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/vendeka-nl/tailwind-config-to-php/issues"
+  },
+  "homepage": "https://github.com/vendeka-nl/tailwind-config-to-php#readme"
+}
