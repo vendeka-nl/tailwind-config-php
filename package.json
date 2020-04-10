@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vendeka-nl/tailwind-config-to-php.git"
+    "url": "git+https://github.com/vendeka-nl/tailwind-config-php.git"
   },
   "keywords": [
     "tailwind",
@@ -24,7 +24,7 @@
   "author": "Vendeka",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/vendeka-nl/tailwind-config-to-php/issues"
+    "url": "https://github.com/vendeka-nl/tailwind-config-php/issues"
   },
-  "homepage": "https://github.com/vendeka-nl/tailwind-config-to-php#readme"
+  "homepage": "https://github.com/vendeka-nl/tailwind-config-php#readme"
 }
