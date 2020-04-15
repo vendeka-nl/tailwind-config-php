@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/vendeka-nl/tailwind-config-php/issues"
   },
-  "homepage": "https://github.com/vendeka-nl/tailwind-config-php#readme"
+  "homepage": "https://github.com/vendeka-nl/tailwind-config-php#readme",
+  "bin": {
+    "tw2php": "./index.js"
+  }
 }
