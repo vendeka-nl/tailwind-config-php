@@ -1,6 +1,6 @@
 {
   "name": "@vendeka/tailwind-config-php",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Use your TailwindCSS config in PHP.",
   "main": "index.js",
   "dependencies": {
