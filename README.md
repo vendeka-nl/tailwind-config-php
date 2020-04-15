@@ -2,7 +2,7 @@
 
 ## Installation 
 ```
-npm install @vendeka/tailwind-config-php
+npm install --global @vendeka/tailwind-config-php
 ```
 
 ## Usage
