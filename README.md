@@ -24,7 +24,7 @@ Now you can use the resolved config in your PHP as an object.
 
 ```php
 <?php
-$tailwind = require('tailwind.config.php');
+$tailwind = require 'tailwind.config.php';
 $tailwind->theme->colors->gray->{500};
 ```
 
