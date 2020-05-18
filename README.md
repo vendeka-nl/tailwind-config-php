@@ -1,5 +1,7 @@
 # Use your TailwindCSS config in PHP
 
+![npm (scoped)](https://img.shields.io/npm/v/@vendeka/tailwind-config-php)
+
 ## Installation 
 ```
 npm install --global @vendeka/tailwind-config-php
@@ -24,7 +26,7 @@ Now you can use the resolved config in your PHP as an object.
 
 ```php
 <?php
-$tailwind = require('tailwind.config.php');
+$tailwind = require 'tailwind.config.php';
 $tailwind->theme->colors->gray->{500};
 ```
 
