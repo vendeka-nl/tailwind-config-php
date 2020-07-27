@@ -15,7 +15,7 @@ Browse to the directory where your [TailwindCSS config file](https://tailwindcss
 tw2php
 ```
 
-By default it read `tailwind.config.js` and writes it to `tailwind.config.php`. You can override the file names using the `--config`/`-c` and `--output`/`-o` options.
+By default it reads `tailwind.config.js` and writes to `tailwind.config.php`. You can override the file names using the `--config`/`-c` and `--output`/`-o` options.
 
 ```
 tw2php -c tailwind.js -o config/tailwind.php
