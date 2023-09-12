@@ -1,15 +1,21 @@
 {
   "name": "@vendeka/tailwind-config-php",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Use your TailwindCSS config in PHP.",
   "main": "index.js",
   "dependencies": {
-    "tailwindcss": "^1.0",
-    "yargs": "^15.3.1"
+    "@prettier/plugin-php": "^0.20.1",
+    "tailwindcss": "1.x || 2.x || 3.x",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2",
+    "yargs": "^17.7.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.6.0",
+    "@types/yargs": "^17.0.24"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc --build"
   },
   "repository": {
     "type": "git",
@@ -28,6 +34,7 @@
   },
   "homepage": "https://github.com/vendeka-nl/tailwind-config-php#readme",
   "bin": {
-    "tw2php": "./index.js"
+    "tailwindphp": "./dist/cli.js",
+    "tw2php": "./dist/cli.js"
   }
 }
