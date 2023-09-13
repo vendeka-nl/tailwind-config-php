@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { writeFile } from "node:fs/promises";
-import { normalize } from "node:path";
-import { format } from "prettier";
+import { normalize, resolve } from "node:path";
+import { Options, format, resolveConfig } from 'prettier';
 import { resolveTailwindConfig } from "./resolveTailwindConfig";
 import { filterObject } from "./filterObject";
 import { convertToPhp } from "./convertToPhp";
@@ -31,10 +31,13 @@ export async function writeTailwindConfigToPhp(options: { config?: string, outpu
         resolvedConfig = filterObject(resolvedConfig, options.properties?.map(x => x.split(',')).flat());
     }
 
-    const output = await format(`<?php\n\nreturn ${convertToPhp(resolvedConfig)};\n`, {
+    const prettierOptions: Options = {
+        ...((await resolveConfig(resolve(__dirname, '../..'))) || {}),
         parser: "php",
         plugins: ["@prettier/plugin-php"],
-    });
+    };
+
+    const output = await format(`<?php\n\nreturn ${convertToPhp(resolvedConfig)};\n`, prettierOptions);
 
     await writeFile(options.output, output);
 }

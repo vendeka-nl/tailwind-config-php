@@ -18,28 +18,12 @@ function mapToPhp(value, depth, indent) {
 function convertToPhp(obj, depth = 0) {
     const indent = ' '.repeat(4);
     const arrayItems = Object.entries(obj).map(([key, value]) => {
-        return `${indent.repeat(depth + 3)}'${key}' => ${mapToPhp(value, depth + 3, indent)},\n`;
+        return `${indent.repeat(depth + 3)}'${key}' => ${mapToPhp(value, depth + 1, indent)},\n`;
     });
     return [
-        `new class\n`,
-        `{\n`,
-        `${indent.repeat(depth + 1)}protected array $data;\n`,
-        '\n',
-        `${indent.repeat(depth + 1)}public function __construct()\n`,
-        `${indent.repeat(depth + 1)}{\n`,
-        `${indent.repeat(depth + 2)}$this->data = [\n`,
+        `(object) [\n`,
         ...arrayItems,
-        `${indent.repeat(depth + 2)}];\n`,
-        `${indent.repeat(depth + 1)}}\n`,
-        '\n',
-        `${indent.repeat(depth + 1)}public function __get(mixed $x): mixed {\n`,
-        `${indent.repeat(depth + 2)}return $this->data[$x];\n`,
-        `${indent.repeat(depth + 1)}}\n`,
-        '\n',
-        `${indent.repeat(depth + 1)}public function __isset(mixed $x): bool {\n`,
-        `${indent.repeat(depth + 2)}return isset($this->data[$x]);\n`,
-        `${indent.repeat(depth + 1)}}\n`,
-        `${indent.repeat(depth)}}\n`,
+        `]\n`,
     ].join('');
 }
 exports.convertToPhp = convertToPhp;

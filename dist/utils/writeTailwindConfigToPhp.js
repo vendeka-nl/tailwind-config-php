@@ -28,10 +28,12 @@ async function writeTailwindConfigToPhp(options) {
     if (options.properties?.length) {
         resolvedConfig = (0, filterObject_1.filterObject)(resolvedConfig, options.properties?.map(x => x.split(',')).flat());
     }
-    const output = await (0, prettier_1.format)(`<?php\n\nreturn ${(0, convertToPhp_1.convertToPhp)(resolvedConfig)};\n`, {
+    const prettierOptions = {
+        ...((await (0, prettier_1.resolveConfig)((0, node_path_1.resolve)(__dirname, '../..'))) || {}),
         parser: "php",
         plugins: ["@prettier/plugin-php"],
-    });
+    };
+    const output = await (0, prettier_1.format)(`<?php\n\nreturn ${(0, convertToPhp_1.convertToPhp)(resolvedConfig)};\n`, prettierOptions);
     await (0, promises_1.writeFile)(options.output, output);
 }
 exports.writeTailwindConfigToPhp = writeTailwindConfigToPhp;

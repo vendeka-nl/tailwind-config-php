@@ -15,7 +15,8 @@
     "@types/yargs": "^17.0.24"
   },
   "scripts": {
-    "build": "tsc --build"
+    "build": "tsc --build",
+    "watch": "tsc --watch"
   },
   "repository": {
     "type": "git",
@@ -36,5 +37,9 @@
   "bin": {
     "tailwindphp": "./dist/cli.js",
     "tw2php": "./dist/cli.js"
-  }
+  },
+  "files": [
+    ".prettierrc",
+    "dist"
+  ]
 }
