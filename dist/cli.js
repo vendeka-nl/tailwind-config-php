@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -18,6 +19,7 @@ const writeTailwindConfigToPhp_1 = require("./utils/writeTailwindConfigToPhp");
         .alias('properties', 'p')
         .string(['c', 'o'])
         .array(['p'])
+        .alias('v', 'version')
         .argv;
     try {
         await (0, writeTailwindConfigToPhp_1.writeTailwindConfigToPhp)(argv);

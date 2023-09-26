@@ -20,7 +20,7 @@ async function writeTailwindConfigToPhp(options) {
         tailwindConfigFile = ['tailwind.config.ts', 'tailwind.config.js']
             .map(file => (0, node_path_1.normalize)(`${process.cwd()}/${file}`))
             .find(file => (0, node_fs_1.existsSync)(file));
-        if (!(0, node_fs_1.existsSync)(tailwindConfigFile)) {
+        if (!tailwindConfigFile) {
             throw new Error('No Tailwind CSS config file detected. Please specify one using the `config` flag.');
         }
     }

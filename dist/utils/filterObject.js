@@ -6,28 +6,29 @@ function filterObject(obj, keys) {
     keys.forEach(key => {
         if (obj.hasOwnProperty(key)) {
             output[key] = obj[key];
+            return;
         }
-        else if (key.includes('.')) {
-            const parts = key.split('.');
-            let o = obj;
-            let i;
-            for (i = 0; i < parts.length; i++) {
-                const k = parts[i];
-                if (o.hasOwnProperty(k)) {
-                    o = o[k];
-                }
-            }
-            if (o !== undefined && i === parts.length) {
-                let out = output;
-                for (let j = 0; j < parts.length; j++) {
-                    const l = parts[j];
-                    if (!out.hasOwnProperty(l)) {
-                        out[l] = j === parts.length - 1 ? o : {};
-                    }
-                    out = out[l];
-                }
-            }
+        if (!key.includes('.')) {
+            return;
         }
+        const parts = key.split('.');
+        let i = 0;
+        const o = parts.reduce((previousValue, part) => {
+            if (previousValue?.hasOwnProperty(part)) {
+                i++;
+                return previousValue[part];
+            }
+        }, obj);
+        if (i < parts.length) {
+            return;
+        }
+        let out = output;
+        parts.forEach((part, index) => {
+            if (!out.hasOwnProperty(part)) {
+                out[part] = index === parts.length - 1 ? o : {};
+            }
+            out = out[part];
+        });
     });
     return output;
 }

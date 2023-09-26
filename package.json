@@ -5,8 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "@prettier/plugin-php": "^0.20.1",
-    "tailwindcss": "1.x || 2.x || 3.x",
     "prettier": "^3.0.3",
+    "tailwindcss": "1.x || 2.x || 3.x",
     "typescript": "^5.2.2",
     "yargs": "^17.7.2"
   },

@@ -6,8 +6,8 @@ import { resolveTailwindConfig } from "./resolveTailwindConfig";
 import { filterObject } from "./filterObject";
 import { convertToPhp } from "./convertToPhp";
 
-export async function writeTailwindConfigToPhp(options: { config?: string, output?: string, properties?: Array<string> }): Promise<void> {
-    let tailwindConfigFile: string;
+export async function writeTailwindConfigToPhp(options: { config?: string, output: string, properties?: Array<string> }): Promise<void> {
+    let tailwindConfigFile: string | undefined;
 
     if (options.config) {
         tailwindConfigFile = normalize(`${process.cwd()}/${options.config}`);
@@ -20,7 +20,7 @@ export async function writeTailwindConfigToPhp(options: { config?: string, outpu
             .map(file => normalize(`${process.cwd()}/${file}`))
             .find(file => existsSync(file));
 
-        if (!existsSync(tailwindConfigFile)) {
+        if (!tailwindConfigFile) {
             throw new Error('No Tailwind CSS config file detected. Please specify one using the `config` flag.');
         }
     }

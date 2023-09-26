@@ -1,5 +1,4 @@
-
-function mapToPhp(value: any, depth: number, indent: string): string {
+function mapToPhp(value: any, depth: number, indent: string): string | null {
     if (typeof value === 'undefined' || typeof value === 'function') {
         return null;
     }
@@ -20,13 +19,8 @@ function mapToPhp(value: any, depth: number, indent: string): string {
 export function convertToPhp(obj: Record<string, any>, depth = 0): string {
     const indent: string = ' '.repeat(4);
 
-    const arrayItems: string[] = Object.entries(obj).map(([key, value]) => {
-        return `${indent.repeat(depth + 3)}'${key}' => ${mapToPhp(value, depth + 1, indent)},\n`;
-    });
-
-    return [
-        `(object) [\n`,
-        ...arrayItems,
-        `]\n`,
-    ].join('');
+    return `(object) [\n${Object.entries(obj)
+            .map(([key, value]) => `${indent.repeat(depth + 3)}'${key}' => ${mapToPhp(value, depth + 1, indent)},`)
+            .join('\n')
+        }\n]\n`;
 };

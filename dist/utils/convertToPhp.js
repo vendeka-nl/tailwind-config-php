@@ -17,14 +17,9 @@ function mapToPhp(value, depth, indent) {
 }
 function convertToPhp(obj, depth = 0) {
     const indent = ' '.repeat(4);
-    const arrayItems = Object.entries(obj).map(([key, value]) => {
-        return `${indent.repeat(depth + 3)}'${key}' => ${mapToPhp(value, depth + 1, indent)},\n`;
-    });
-    return [
-        `(object) [\n`,
-        ...arrayItems,
-        `]\n`,
-    ].join('');
+    return `(object) [\n${Object.entries(obj)
+        .map(([key, value]) => `${indent.repeat(depth + 3)}'${key}' => ${mapToPhp(value, depth + 1, indent)},`)
+        .join('\n')}\n]\n`;
 }
 exports.convertToPhp = convertToPhp;
 ;

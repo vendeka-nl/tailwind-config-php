@@ -1,36 +1,41 @@
-export function filterObject(obj: any, keys: string[]): Record<string, any> {
+export function filterObject(obj: Record<string, any>, keys: string[]): Record<string, any> {
     const output: Record<string, any> = {};
 
     keys.forEach(key => {
         if (obj.hasOwnProperty(key)) {
             output[key] = obj[key];
-        } else if (key.includes('.')) {
-            const parts = key.split('.');
-            let o: any = obj;
-            let i: number;
 
-            for (i = 0; i < parts.length; i++) {
-                const k = parts[i];
-
-                if (o.hasOwnProperty(k)) {
-                    o = o[k];
-                }
-            }
-
-            if (o !== undefined && i === parts.length) {
-                let out: any = output;
-
-                for (let j = 0; j < parts.length; j++) {
-                    const l: string = parts[j];
-
-                    if (!out.hasOwnProperty(l)) {
-                        out[l] = j === parts.length - 1 ? o : {};
-                    }
-
-                    out = out[l];
-                }
-            }
+            return;
         }
+
+        if (!key.includes('.')) {
+            return;
+        }
+
+        const parts = key.split('.');
+        let i: number = 0;
+
+        const o: Record<string, any> | undefined = parts.reduce((previousValue: Record<string, any> | undefined, part: string) => {
+            if (previousValue?.hasOwnProperty(part)) {
+                i++;
+
+                return previousValue[part];
+            }
+        }, obj);
+
+        if (i < parts.length) {
+            return;
+        }
+
+        let out: Record<string, any> = output;
+
+        parts.forEach((part, index) => {
+            if (!out.hasOwnProperty(part)) {
+                out[part] = index === parts.length - 1 ? o : {};
+            }
+
+            out = out[part];
+        });
     });
 
     return output;
