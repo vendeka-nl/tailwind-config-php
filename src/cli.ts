@@ -26,4 +26,3 @@ import { writeTailwindConfigToPhp } from './utils/writeTailwindConfigToPhp';
         console.error((e as Error).message);
     }
 })();
-

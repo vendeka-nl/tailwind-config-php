@@ -1,26 +1,28 @@
-function mapToPhp(value: any, depth: number, indent: string): string | null {
+function mapToPhp(value: any, indent: string, depth: number): string | null {
     if (typeof value === 'undefined' || typeof value === 'function') {
         return null;
     }
 
     if (Array.isArray(value)) {
-        return `[${value.map((v) => {
-            const x = mapToPhp(v, depth, indent);
+        const mappedArray = value.map((v) => {
+            const mapped = mapToPhp(v, indent, depth);
 
-            return `${indent.repeat(depth)}${x}\n`;
-        })}]`;
+            return mapped?.length ? `\n${indent.repeat(depth + 1)}${mapped}` : '';
+        });
+
+        return `[${mappedArray.length > 0 ? `${mappedArray}\n${indent.repeat(depth)}` : ''}]`;
     }
 
     return typeof value === 'object' && !Array.isArray(value)
-        ? convertToPhp(value, depth).trimEnd()
-        : JSON.stringify(value);
+        ? convertToPhp(value, indent, depth).trimEnd()
+        : JSON.stringify(value, undefined, indent);
 }
 
-export function convertToPhp(obj: Record<string, any>, depth = 0): string {
-    const indent: string = ' '.repeat(4);
+export function convertToPhp(obj: Record<string, any>, indentation: string | number, depth = 0): string {
+    const indent = typeof indentation === 'string' ? indentation : ' '.repeat(indentation);
+    const mapped = Object.entries(obj)
+        .map(([key, value]) => `${indent.repeat(depth + 1)}'${key}' => ${mapToPhp(value, indent, depth + 1)},`)
+        .join('\n');
 
-    return `(object) [\n${Object.entries(obj)
-            .map(([key, value]) => `${indent.repeat(depth + 3)}'${key}' => ${mapToPhp(value, depth + 1, indent)},`)
-            .join('\n')
-        }\n]\n`;
-};
+    return `(object) [${mapped.length > 0 ? `\n${mapped}\n${indent.repeat(depth)}` : ''}]`;
+}

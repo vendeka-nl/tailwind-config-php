@@ -4,7 +4,6 @@ exports.writeTailwindConfigToPhp = void 0;
 const node_fs_1 = require("node:fs");
 const promises_1 = require("node:fs/promises");
 const node_path_1 = require("node:path");
-const prettier_1 = require("prettier");
 const resolveTailwindConfig_1 = require("./resolveTailwindConfig");
 const filterObject_1 = require("./filterObject");
 const convertToPhp_1 = require("./convertToPhp");
@@ -28,12 +27,7 @@ async function writeTailwindConfigToPhp(options) {
     if (options.properties?.length) {
         resolvedConfig = (0, filterObject_1.filterObject)(resolvedConfig, options.properties?.map(x => x.split(',')).flat());
     }
-    const prettierOptions = {
-        ...((await (0, prettier_1.resolveConfig)((0, node_path_1.resolve)(__dirname, '../..'))) || {}),
-        parser: "php",
-        plugins: ["@prettier/plugin-php"],
-    };
-    const output = await (0, prettier_1.format)(`<?php\n\nreturn ${(0, convertToPhp_1.convertToPhp)(resolvedConfig)};\n`, prettierOptions);
+    const output = `<?php\n\nreturn ${(0, convertToPhp_1.convertToPhp)(resolvedConfig, 4)};\n`;
     await (0, promises_1.writeFile)(options.output, output);
 }
 exports.writeTailwindConfigToPhp = writeTailwindConfigToPhp;

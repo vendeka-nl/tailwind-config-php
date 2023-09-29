@@ -1,23 +1,14 @@
-import { readFile } from "fs/promises";
+import { extname } from 'node:path';
 import { Config } from 'tailwindcss';
 import resolveConfig from 'tailwindcss/resolveConfig';
-import ts from 'typescript';
+import { register as registerTsNode } from 'ts-node';
 
 export async function resolveTailwindConfig(filename: string) {
-    let tailwindConfig: Config;
-
-    if (filename.endsWith('.ts')) {
-        const input = await readFile(filename, "utf-8");
-        const { outputText } = ts.transpileModule(input, {
-            compilerOptions: {
-                module: ts.ModuleKind.CommonJS
-            }
-        });
-
-        tailwindConfig = eval(outputText);
-    } else {
-        tailwindConfig = require(filename);
+    if (extname(filename) === '.ts') {
+        registerTsNode();
     }
+
+    const tailwindConfig: Config = require(filename);
 
     return resolveConfig(tailwindConfig);
 }

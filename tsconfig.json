@@ -2,7 +2,7 @@
   "compilerOptions": {
     "noImplicitAny": true,
     "noEmitOnError": true,
-    "removeComments": false,
+    "removeComments": true,
     "sourceMap": false,
     "target": "ES2022",
     "outDir": "./dist",

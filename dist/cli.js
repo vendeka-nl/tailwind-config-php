@@ -19,7 +19,6 @@ const writeTailwindConfigToPhp_1 = require("./utils/writeTailwindConfigToPhp");
         .alias('properties', 'p')
         .string(['c', 'o'])
         .array(['p'])
-        .alias('v', 'version')
         .argv;
     try {
         await (0, writeTailwindConfigToPhp_1.writeTailwindConfigToPhp)(argv);
