@@ -1,7 +1,10 @@
-export function filterObject(obj: Record<string, any>, keys: string[]): Record<string, any> {
-    const output: Record<string, any> = {};
+export function filterObject<
+    TInput extends Record<string, unknown> = Record<string, unknown>,
+    TOutput extends Record<string, unknown> = Record<string, unknown>,
+>(obj: TInput, keys: string[]): TOutput {
+    const output: Record<string, unknown> = {};
 
-    keys.forEach(key => {
+    keys.forEach((key) => {
         if (obj.hasOwnProperty(key)) {
             output[key] = obj[key];
 
@@ -15,13 +18,16 @@ export function filterObject(obj: Record<string, any>, keys: string[]): Record<s
         const parts = key.split('.');
         let i: number = 0;
 
-        const o: Record<string, any> | undefined = parts.reduce((previousValue: Record<string, any> | undefined, part: string) => {
-            if (previousValue?.hasOwnProperty(part)) {
-                i++;
+        const o: Record<string, any> | undefined = parts.reduce(
+            (previousValue: Record<string, any> | undefined, part: string) => {
+                if (previousValue?.hasOwnProperty(part)) {
+                    i++;
 
-                return previousValue[part];
-            }
-        }, obj);
+                    return previousValue[part];
+                }
+            },
+            obj,
+        );
 
         if (i < parts.length) {
             return;
@@ -38,5 +44,5 @@ export function filterObject(obj: Record<string, any>, keys: string[]): Record<s
         });
     });
 
-    return output;
-};
+    return output as TOutput;
+}

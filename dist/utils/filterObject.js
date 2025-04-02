@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.filterObject = void 0;
+exports.filterObject = filterObject;
 function filterObject(obj, keys) {
     const output = {};
-    keys.forEach(key => {
+    keys.forEach((key) => {
         if (obj.hasOwnProperty(key)) {
             output[key] = obj[key];
             return;
@@ -32,5 +32,3 @@ function filterObject(obj, keys) {
     });
     return output;
 }
-exports.filterObject = filterObject;
-;

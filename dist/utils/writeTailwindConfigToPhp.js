@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.writeTailwindConfigToPhp = void 0;
+exports.writeTailwindConfigToPhp = writeTailwindConfigToPhp;
 const node_fs_1 = require("node:fs");
 const promises_1 = require("node:fs/promises");
 const node_path_1 = require("node:path");
@@ -17,17 +17,16 @@ async function writeTailwindConfigToPhp(options) {
     }
     else {
         tailwindConfigFile = ['tailwind.config.ts', 'tailwind.config.js']
-            .map(file => (0, node_path_1.normalize)(`${process.cwd()}/${file}`))
-            .find(file => (0, node_fs_1.existsSync)(file));
+            .map((file) => (0, node_path_1.normalize)(`${process.cwd()}/${file}`))
+            .find((file) => (0, node_fs_1.existsSync)(file));
         if (!tailwindConfigFile) {
             throw new Error('No Tailwind CSS config file detected. Please specify one using the `config` flag.');
         }
     }
-    let resolvedConfig = await (0, resolveTailwindConfig_1.resolveTailwindConfig)(tailwindConfigFile);
+    let resolvedConfig = (await (0, resolveTailwindConfig_1.resolveTailwindConfig)(tailwindConfigFile));
     if (options.properties?.length) {
-        resolvedConfig = (0, filterObject_1.filterObject)(resolvedConfig, options.properties?.map(x => x.split(',')).flat());
+        resolvedConfig = (0, filterObject_1.filterObject)(resolvedConfig, options.properties?.map((x) => x.split(',')).flat());
     }
     const output = `<?php\n\nreturn ${(0, convertToPhp_1.convertToPhp)(resolvedConfig, 4)};\n`;
-    await (0, promises_1.writeFile)(options.output, output);
+    await (0, promises_1.writeFile)((0, node_path_1.normalize)(`${process.cwd()}/${options.output}`), output);
 }
-exports.writeTailwindConfigToPhp = writeTailwindConfigToPhp;

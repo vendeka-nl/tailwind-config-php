@@ -18,8 +18,7 @@ const writeTailwindConfigToPhp_1 = require("./utils/writeTailwindConfigToPhp");
         .describe('properties', 'List of included properties')
         .alias('properties', 'p')
         .string(['c', 'o'])
-        .array(['p'])
-        .argv;
+        .array(['p']).argv;
     try {
         await (0, writeTailwindConfigToPhp_1.writeTailwindConfigToPhp)(argv);
         console.log(`Tailwind config written to ${argv.output}`);

@@ -3,7 +3,7 @@
 import yargs from 'yargs/yargs';
 import { writeTailwindConfigToPhp } from './utils/writeTailwindConfigToPhp';
 
-(async function(): Promise<void> {
+(async function (): Promise<void> {
     const argv = await yargs(process.argv.slice(2))
         .usage('Usage: tw2php')
         .help('help')
@@ -15,8 +15,7 @@ import { writeTailwindConfigToPhp } from './utils/writeTailwindConfigToPhp';
         .describe('properties', 'List of included properties')
         .alias('properties', 'p')
         .string(['c', 'o'])
-        .array(['p'])
-        .argv;
+        .array(['p']).argv;
 
     try {
         await writeTailwindConfigToPhp(argv);

@@ -1,43 +1,47 @@
 {
-  "name": "@vendeka/tailwind-config-php",
-  "version": "2.0.0",
-  "description": "Use your TailwindCSS config in PHP.",
-  "main": "index.js",
-  "dependencies": {
-    "tailwindcss": "1.x || 2.x || 3.x",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.2.2",
-    "yargs": "^17.7.2"
-  },
-  "devDependencies": {
-    "@types/node": "^20.6.0",
-    "@types/yargs": "^17.0.24"
-  },
-  "scripts": {
-    "build": "tsc --build",
-    "watch": "tsc --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vendeka-nl/tailwind-config-php.git"
-  },
-  "keywords": [
-    "tailwind",
-    "tailwindcss",
-    "config",
-    "php"
-  ],
-  "author": "Vendeka",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/vendeka-nl/tailwind-config-php/issues"
-  },
-  "homepage": "https://github.com/vendeka-nl/tailwind-config-php#readme",
-  "bin": {
-    "tailwindphp": "./dist/cli.js",
-    "tw2php": "./dist/cli.js"
-  },
-  "files": [
-    "dist"
-  ]
+    "name": "@vendeka/tailwind-config-php",
+    "version": "2.0.0",
+    "description": "Use your TailwindCSS config in PHP.",
+    "main": "index.js",
+    "dependencies": {
+        "tailwindcss": "3.x",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.2.2",
+        "yargs": "^17.7.2"
+    },
+    "devDependencies": {
+        "@types/jest": "^29.5.14",
+        "@types/node": "^22.13.17",
+        "@types/yargs": "^17.0.24",
+        "jest": "^29.7.0",
+        "ts-jest": "^29.3.1"
+    },
+    "scripts": {
+        "build": "tsc --build",
+        "watch": "tsc --watch",
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vendeka-nl/tailwind-config-php.git"
+    },
+    "keywords": [
+        "tailwind",
+        "tailwindcss",
+        "config",
+        "php"
+    ],
+    "author": "Vendeka",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/vendeka-nl/tailwind-config-php/issues"
+    },
+    "homepage": "https://github.com/vendeka-nl/tailwind-config-php#readme",
+    "bin": {
+        "tailwindphp": "./dist/cli.js",
+        "tw2php": "./dist/cli.js"
+    },
+    "files": [
+        "dist"
+    ]
 }
