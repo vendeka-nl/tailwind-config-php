@@ -14,7 +14,7 @@ npm install @vendeka/tailwind-config-php
 
 ## Usage
 
-Browse to the directory where your [Tailwind CSS config file](https://tailwindcss.com/docs/configuration/) is located and execute:
+Browse to the directory where your [Tailwind CSS config file](https://v3.tailwindcss.com/docs/installation) is located and execute:
 
 ```sh
 npx tw2php
