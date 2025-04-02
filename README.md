@@ -22,7 +22,7 @@ Browse to the directory where your [Tailwind CSS config file](https://tailwindcs
 npx tw2php
 ```
 
-By default the command will export the completely Tailwind CSS configuration. Functions such as plugins are replaced with `null`.
+By default the command reads `tailwind.config.js`, writes to `tailwind.config.php`, and exports the complete Tailwind CSS configuration. Functions such as plugins are replaced with `null`.
 
 
 ### Input file
