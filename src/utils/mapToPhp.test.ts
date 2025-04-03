@@ -1,5 +1,6 @@
-import { mapToPhp } from './mapToPhp';
+import { describe, expect, it, jest } from '@jest/globals';
 import { convertToPhp } from './convertToPhp';
+import { mapToPhp } from './mapToPhp';
 
 jest.mock('./convertToPhp');
 
@@ -27,7 +28,9 @@ describe('mapToPhp', () => {
 
     it('should handle nested arrays', () => {
         expect(mapToPhp([1, [2, [3]]], indent, depth)).toBe(
-            `[\n${indent}1,\n${indent}[\n${indent.repeat(2)}2,\n${indent.repeat(2)}[\n${indent.repeat(3)}3\n${indent.repeat(2)}]\n${indent}]\n]`,
+            `[\n${indent}1,\n${indent}[\n${indent.repeat(2)}2,\n${indent.repeat(
+                2,
+            )}[\n${indent.repeat(3)}3\n${indent.repeat(2)}]\n${indent}]\n]`,
         );
     });
 

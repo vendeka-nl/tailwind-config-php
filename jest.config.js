@@ -2,6 +2,10 @@
 module.exports = {
     testEnvironment: 'node',
     transform: {
-        '^.+.ts$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
+        '^.+.ts$': ['ts-jest', { tsconfig: './tsconfig.test.json' }],
+    },
+    moduleNameMapper: {
+        '^/path/to/config\\.js$': '<rootDir>/src/__mocks__/mockJsConfig.js',
+        '^/path/to/config\\.ts$': '<rootDir>/src/__mocks__/mockTsConfig.ts',
     },
 };

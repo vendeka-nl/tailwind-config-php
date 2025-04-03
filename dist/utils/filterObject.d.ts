@@ -1,1 +1,0 @@
-export declare function filterObject<TInput extends Record<string, unknown> = Record<string, unknown>, TOutput extends Record<string, unknown> = Record<string, unknown>>(obj: TInput, keys: string[]): TOutput;

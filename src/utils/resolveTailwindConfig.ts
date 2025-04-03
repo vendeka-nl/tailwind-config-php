@@ -8,7 +8,7 @@ export async function resolveTailwindConfig(filename: string) {
         registerTsNode();
     }
 
-    const tailwindConfig: Config = require(filename);
+    const tailwindConfig: Config = (await import(filename)).default;
 
     return resolveConfig(tailwindConfig);
 }

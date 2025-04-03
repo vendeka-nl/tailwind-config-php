@@ -13,9 +13,7 @@ export function mapToPhp(
         const mappedArray = value.map((v) => {
             const mapped = mapToPhp(v, indent, depth + 1);
 
-            return mapped?.length
-                ? `\n${indent.repeat(depth)}${mapped}`
-                : '';
+            return mapped?.length ? `\n${indent.repeat(depth)}${mapped}` : '';
         });
 
         return `[${
@@ -26,6 +24,10 @@ export function mapToPhp(
     }
 
     return typeof value === 'object' && !Array.isArray(value)
-        ? convertToPhp(value as Record<string, unknown>, indent, depth).trimEnd()
+        ? convertToPhp(
+              value as Record<string, unknown>,
+              indent,
+              depth,
+          ).trimEnd()
         : JSON.stringify(value, undefined, indent);
 }
