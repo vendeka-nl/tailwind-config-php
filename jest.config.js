@@ -6,6 +6,8 @@ module.exports = {
     },
     moduleNameMapper: {
         '^/path/to/config\\.js$': '<rootDir>/src/__mocks__/mockJsConfig.js',
+        '^C:\\\\path\\\\to\\\\config\\.js$': '<rootDir>/src/__mocks__/mockJsConfig.js',
         '^/path/to/config\\.ts$': '<rootDir>/src/__mocks__/mockTsConfig.ts',
+        '^C:\\\\path\\\\to\\\\config\\.ts$': '<rootDir>/src/__mocks__/mockTsConfig.ts',
     },
 };

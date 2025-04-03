@@ -1,11 +1,16 @@
 import { describe, expect, it, jest } from '@jest/globals';
-import { Config } from 'tailwindcss';
+import { build } from 'esbuild';
 import resolveConfig from 'tailwindcss/resolveConfig';
-import { register as registerTsNode } from 'ts-node';
 import { resolveTailwindConfig } from './resolveTailwindConfig';
 
-jest.mock('ts-node', () => ({
-    register: jest.fn(),
+jest.mock('esbuild', () => ({
+    build: jest.fn(() => ({
+        outputFiles: [
+            {
+                contents: Buffer.from('export default { theme: {} };'),
+            },
+        ],
+    })),
 }));
 
 jest.mock('tailwindcss/resolveConfig', () => jest.fn(() => ({})));
@@ -24,32 +29,31 @@ jest.mock('fs', () => ({
     existsSync: jest.fn(() => true),
 }));
 
-
 describe('resolveTailwindConfig', () => {
     afterEach(() => {
         jest.clearAllMocks();
     });
 
-    it('should register ts-node if the file is a TypeScript file', async () => {
+    it('should run esbuild if the file is a TypeScript file', async () => {
         jest.mock('/path/to/config.ts', () => ({ theme: {} }), {
             virtual: true,
         });
 
         const result = await resolveTailwindConfig('/path/to/config.ts');
 
-        expect(registerTsNode).toHaveBeenCalled();
+        expect(build).toHaveBeenCalled();
         expect(resolveConfig).toHaveBeenCalledWith({ theme: {} });
         expect(result).toBeDefined();
     });
 
-    it('should not register ts-node if the file is not a TypeScript file', async () => {
+    it('should not run esbuild if the file is not a TypeScript file', async () => {
         jest.mock('/path/to/config.js', () => ({ theme: {} }), {
             virtual: true,
         });
 
         const result = await resolveTailwindConfig('/path/to/config.js');
 
-        expect(registerTsNode).not.toHaveBeenCalled();
+        expect(build).not.toHaveBeenCalled();
         expect(resolveConfig).toHaveBeenCalledWith({ theme: {} });
         expect(result).toBeDefined();
     });
