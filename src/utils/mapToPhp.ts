@@ -1,7 +1,9 @@
+import { Format } from '../types/format';
 import { convertToPhp } from './convertToPhp';
 
 export function mapToPhp(
     value: unknown,
+    format: Format,
     indent: string,
     depth: number,
 ): string | null {
@@ -11,7 +13,7 @@ export function mapToPhp(
 
     if (Array.isArray(value)) {
         const mappedArray = value.map((v) => {
-            const mapped = mapToPhp(v, indent, depth + 1);
+            const mapped = mapToPhp(v, format, indent, depth + 1);
 
             return mapped?.length ? `\n${indent.repeat(depth)}${mapped}` : '';
         });
@@ -26,6 +28,7 @@ export function mapToPhp(
     return typeof value === 'object' && !Array.isArray(value)
         ? convertToPhp(
               value as Record<string, unknown>,
+              format,
               indent,
               depth,
           ).trimEnd()

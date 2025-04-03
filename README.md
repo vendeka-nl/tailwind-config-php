@@ -47,9 +47,17 @@ npx tw2php --properties "theme.colors,prefix"
 npx tw2php --properties "theme.colors" --properties "prefix"
 ```
 
+### Format
+
+You can specify the output format of the output using the `--format` option. Possible values are `array` and `object` (default: `object`).
+
+```sh
+npx tw2php --format array
+```
+
 ## Usage in PHP
 
-Now you can use the resolved config in your PHP as an object.
+Now you can use the resolved config in your PHP as an object (or an array).
 
 ```php
 $tailwind = require 'tailwind.config.php';

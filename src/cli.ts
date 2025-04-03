@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import yargs from 'yargs/yargs';
+import { Format } from './types/format';
 import { writeTailwindConfigToPhp } from './utils/writeTailwindConfigToPhp';
 
 (async function (): Promise<void> {
@@ -14,11 +15,19 @@ import { writeTailwindConfigToPhp } from './utils/writeTailwindConfigToPhp';
         .alias('output', 'o')
         .describe('properties', 'List of included properties')
         .alias('properties', 'p')
+        .describe('format', 'Output format of the resolved configuration')
+        .choices('format', ['array', 'object'])
+        .default('format', 'object')
         .string(['c', 'o'])
         .array(['p']).argv;
 
     try {
-        await writeTailwindConfigToPhp(argv);
+        await writeTailwindConfigToPhp({
+            config: argv.config as string | undefined,
+            output: argv.output,
+            properties: argv.properties as string[] | undefined,
+            format: argv.format as Format | undefined,
+        });
 
         console.log(`Tailwind config written to ${argv.output}`);
     } catch (e) {

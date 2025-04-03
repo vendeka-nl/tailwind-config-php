@@ -1,14 +1,16 @@
 import { existsSync } from 'node:fs';
 import { writeFile } from 'node:fs/promises';
 import { normalize } from 'node:path';
-import { resolveTailwindConfig } from './resolveTailwindConfig';
-import { filterObject } from './filterObject';
+import { Format } from '../types/format';
 import { convertToPhp } from './convertToPhp';
+import { filterObject } from './filterObject';
+import { resolveTailwindConfig } from './resolveTailwindConfig';
 
 export async function writeTailwindConfigToPhp(options: {
     config?: string;
     output: string;
     properties?: Array<string>;
+    format?: Format;
 }): Promise<void> {
     let tailwindConfigFile: string | undefined;
 
@@ -43,7 +45,11 @@ export async function writeTailwindConfigToPhp(options: {
         );
     }
 
-    const output = `<?php\n\nreturn ${convertToPhp(resolvedConfig, 4)};\n`;
+    const output = `<?php\n\nreturn ${convertToPhp(
+        resolvedConfig,
+        options.format ?? 'object',
+        4,
+    )};\n`;
 
     await writeFile(normalize(`${process.cwd()}/${options.output}`), output);
 }

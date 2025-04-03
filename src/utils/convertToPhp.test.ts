@@ -9,42 +9,60 @@ describe('convertToPhp', () => {
         jest.clearAllMocks();
     });
 
-    it('should convert an empty object to an empty PHP object', () => {
-        const result = convertToPhp({}, 4);
-        expect(result).toBe('(object) []');
+    it('should convert an empty object to an empty PHP object or array', () => {
+        expect(convertToPhp({}, 'object', 4)).toBe('(object) []');
+        expect(convertToPhp({}, 'array', 4)).toBe('[]');
     });
 
-    it('should convert a simple object to a PHP object with proper indentation', () => {
+    it('should convert a simple object to a PHP object or array with proper indentation', () => {
         (mapToPhp as jest.Mock).mockImplementation((value) => `'${value}'`);
+
         const obj = { key: 'value' };
-        const result = convertToPhp(obj, 2);
-        expect(result).toBe("(object) [\n  'key' => 'value',\n]");
+
+        expect(convertToPhp(obj, 'object', 2)).toBe(
+            "(object) [\n  'key' => 'value',\n]",
+        );
+        expect(convertToPhp(obj, 'array', 2)).toBe("[\n  'key' => 'value',\n]");
     });
 
     it('should handle nested objects correctly', () => {
-        (mapToPhp as jest.Mock).mockImplementation((value) => {
+        (mapToPhp as jest.Mock).mockImplementation((value, format) => {
             if (typeof value === 'object') {
-                return '(object) []';
+                return format === 'object' ? '(object) []' : '[]';
             }
             return `'${value}'`;
         });
+
         const obj = { key: { nestedKey: 'nestedValue' } };
-        const result = convertToPhp(obj, 2);
-        expect(result).toBe("(object) [\n  'key' => (object) [],\n]");
+
+        expect(convertToPhp(obj, 'array', 2)).toBe("[\n  'key' => [],\n]");
+        expect(convertToPhp(obj, 'object', 2)).toBe(
+            "(object) [\n  'key' => (object) [],\n]",
+        );
     });
 
     it('should use string indentation if provided', () => {
         (mapToPhp as jest.Mock).mockImplementation((value) => `'${value}'`);
+
         const obj = { key: 'value' };
-        const result = convertToPhp(obj, '\t');
-        expect(result).toBe("(object) [\n\t'key' => 'value',\n]");
+
+        expect(convertToPhp(obj, 'array', '\t')).toBe(
+            "[\n\t'key' => 'value',\n]",
+        );
+        expect(convertToPhp(obj, 'object', '\t')).toBe(
+            "(object) [\n\t'key' => 'value',\n]",
+        );
     });
 
     it('should handle an object with multiple keys', () => {
         (mapToPhp as jest.Mock).mockImplementation((value) => `'${value}'`);
+
         const obj = { key1: 'value1', key2: 'value2' };
-        const result = convertToPhp(obj, 2);
-        expect(result).toBe(
+
+        expect(convertToPhp(obj, 'array', 2)).toBe(
+            "[\n  'key1' => 'value1',\n  'key2' => 'value2',\n]",
+        );
+        expect(convertToPhp(obj, 'object', 2)).toBe(
             "(object) [\n  'key1' => 'value1',\n  'key2' => 'value2',\n]",
         );
     });
