@@ -31,7 +31,8 @@ $tailwind->theme->colors->gray->{500};
 By default the command reads `tailwind.config.js`, writes to `tailwind.config.php`, and exports the complete Tailwind CSS configuration.
 Functions such as plugins are replaced with `null`.
 
-Please remember that the PHP file does not automatically update.
+Please note that the generated PHP file will not update automatically when the Tailwind CSS configuration changes.
+You will need to rerun the command to regenerate the PHP file.
 
 ### Input file
 
