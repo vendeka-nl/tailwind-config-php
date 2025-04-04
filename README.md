@@ -1,10 +1,11 @@
 # Use your Tailwind CSS config in PHP
 
-![npm (scoped)](https://img.shields.io/npm/v/@vendeka/tailwind-config-php)
+[![npm (scoped)](https://img.shields.io/npm/v/@vendeka/tailwind-config-php?style=for-the-badge&color=166534)](https://www.npmjs.com/package/@vendeka/tailwind-config-php)
+[![Supports Tailwind CSS v3](https://img.shields.io/badge/Tailwind_CSS-v3-blue?style=for-the-badge&color=075985&link=https%3A%2F%2Fv3.tailwindcss.com%2F)](https://v3.tailwindcss.com/)
+[![GitHub Repo stars](https://img.shields.io/github/stars/vendeka-nl/tailwind-config-php?style=for-the-badge&color=b45309)](https://github.com/vendeka-nl/tailwind-config-php)
 
-Ever needed to use your Tailwind CSS configuration in PHP? With this package you can!
-
-The package is developed and maintained by [Vendeka](https://www.vendeka.nl/), a company from the Netherlands.
+Seamlessly bridge the gap between Tailwind CSS and PHP by converting your Tailwind configuration into a PHP-compatible format.
+Supports both JavaScript and TypeScript configurations.
 
 ## Installation
 
@@ -20,7 +21,17 @@ Browse to the directory where your [Tailwind CSS config file](https://v3.tailwin
 npx tw2php
 ```
 
-By default the command reads `tailwind.config.js`, writes to `tailwind.config.php`, and exports the complete Tailwind CSS configuration. Functions such as plugins are replaced with `null`.
+Now you can use the resolved config in your PHP as an object (or an array).
+
+```php
+$tailwind = require 'tailwind.config.php';
+$tailwind->theme->colors->gray->{500};
+```
+
+By default the command reads `tailwind.config.js`, writes to `tailwind.config.php`, and exports the complete Tailwind CSS configuration.
+Functions such as plugins are replaced with `null`.
+
+Please remember that the PHP file does not automatically update.
 
 ### Input file
 
@@ -38,30 +49,22 @@ By default it writes to `tailwind.config.php`. You can override the output file 
 npx tw2php --output config/tailwind.php
 ```
 
-### Included properties
+### Output format
 
-This package outputs your complete Tailwind CSS configuration by default. To pick only a hand full of option, use the `--properties` option (or the `-p` shorthand). It supports a comma separated list of keys.
-
-```sh
-npx tw2php --properties "theme.colors,prefix"
-npx tw2php --properties "theme.colors" --properties "prefix"
-```
-
-### Format
-
-You can specify the output format of the output using the `--format` option. Possible values are `array` and `object` (default: `object`).
+You can specify the output format of the output using the `--format` option.
+Possible values are `array` and `object` (default: `object`).
 
 ```sh
 npx tw2php --format array
 ```
 
-## Usage in PHP
+### Included properties
 
-Now you can use the resolved config in your PHP as an object (or an array).
+This package outputs your complete Tailwind CSS configuration by default.
+To pick only a hand full of option, use the `--properties` option (or the `-p` shorthand).
+It supports a comma separated list of keys.
 
-```php
-$tailwind = require 'tailwind.config.php';
-$tailwind->theme->colors->gray->{500};
+```sh
+npx tw2php --properties "theme.colors,prefix"
+npx tw2php --properties "theme.colors" --properties "prefix"
 ```
-
-Please remember that the PHP file does not automatically update.
