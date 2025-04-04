@@ -1,0 +1,26 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "declaration": true,
+        "noImplicitAny": true,
+        "noEmitOnError": true,
+        "removeComments": true,
+        "sourceMap": false,
+        "outDir": "./dist",
+        "lib": ["ES2023"],
+        "module": "NodeNext",
+        "target": "ES2022",
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node16"
+    },
+    "include": ["src"],
+    "exclude": [
+        "**/__mocks__/**/*.*",
+        "**/*.test.ts"
+    ]
+}
