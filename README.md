@@ -4,7 +4,7 @@
 [![Supports Tailwind CSS v3](https://img.shields.io/badge/Tailwind_CSS-v3-blue?style=for-the-badge&color=075985&link=https%3A%2F%2Fv3.tailwindcss.com%2F)](https://v3.tailwindcss.com/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/vendeka-nl/tailwind-config-php?style=for-the-badge&color=b45309)](https://github.com/vendeka-nl/tailwind-config-php)
 
-Seamlessly bridge the gap between Tailwind CSS and PHP by converting your Tailwind configuration into a PHP-compatible format.
+Seamlessly bridge the gap between Tailwind CSS and PHP by converting your Tailwind CSS configuration into a PHP-compatible format.
 Supports both JavaScript and TypeScript configurations.
 
 ## Installation

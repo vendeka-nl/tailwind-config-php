@@ -29,7 +29,7 @@ import { writeTailwindConfigToPhp } from './utils/writeTailwindConfigToPhp';
             format: argv.format as Format | undefined,
         });
 
-        console.log(`Tailwind config written to ${argv.output}`);
+        console.log(`Tailwind CSS config written to ${argv.output}`);
     } catch (e) {
         console.error((e as Error).message);
     }

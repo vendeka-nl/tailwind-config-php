@@ -73,7 +73,7 @@ describe('writeTailwindConfigToPhp', () => {
         );
     });
 
-    it('should resolve the Tailwind config and write the PHP file', async () => {
+    it('should resolve the Tailwind CSS config and write the PHP file', async () => {
         const mockResolvedConfig = { theme: { colors: { red: '#ff0000' } } };
         const mockPhpOutput =
             "<?php\n\nreturn ['theme' => ['colors' => ['red' => '#ff0000']]];\n";
