@@ -35,26 +35,22 @@ describe('resolveTailwindConfig', () => {
     });
 
     it('should run esbuild if the file is a TypeScript file', async () => {
-        jest.mock('/path/to/config.ts', () => ({ theme: {} }), {
-            virtual: true,
-        });
+        jest.mock('/path/to/config.ts', () => ({ content: [], theme: {} }));
 
         const result = await resolveTailwindConfig('/path/to/config.ts');
 
         expect(build).toHaveBeenCalled();
-        expect(resolveConfig).toHaveBeenCalledWith({ theme: {} });
+        expect(resolveConfig).toHaveBeenCalledWith({ theme: {} } as any);
         expect(result).toBeDefined();
     });
 
     it('should not run esbuild if the file is not a TypeScript file', async () => {
-        jest.mock('/path/to/config.js', () => ({ theme: {} }), {
-            virtual: true,
-        });
+        jest.mock('/path/to/config.js', () => ({ content: [], theme: {} }));
 
         const result = await resolveTailwindConfig('/path/to/config.js');
 
         expect(build).not.toHaveBeenCalled();
-        expect(resolveConfig).toHaveBeenCalledWith({ theme: {} });
+        expect(resolveConfig).toHaveBeenCalledWith({ content: [], theme: {} });
         expect(result).toBeDefined();
     });
 
