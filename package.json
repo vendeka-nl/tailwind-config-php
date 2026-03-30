@@ -38,8 +38,8 @@
     },
     "homepage": "https://github.com/vendeka-nl/tailwind-config-php#readme",
     "bin": {
-        "tailwindphp": "./dist/cli.js",
-        "tw2php": "./dist/cli.js"
+        "tailwindphp": "dist/cli.js",
+        "tw2php": "dist/cli.js"
     },
     "files": [
         "dist/utils",
