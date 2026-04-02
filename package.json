@@ -42,6 +42,7 @@
         "tw2php": "dist/cli.js"
     },
     "files": [
+        "dist/types",
         "dist/utils",
         "dist/cli.d.ts",
         "dist/cli.js"
