@@ -4,7 +4,7 @@
     "description": "Use your TailwindCSS config in PHP.",
     "dependencies": {
         "esbuild": "^0.28.1",
-        "tailwindcss": "3.x",
+        "tailwindcss": "4.x",
         "yargs": "^18.0.0"
     },
     "devDependencies": {
